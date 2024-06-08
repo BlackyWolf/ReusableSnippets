@@ -1,6 +1,7 @@
 import { joinCss } from '@/utilities';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ErrorMessage } from '@hookform/error-message';
 import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 
@@ -56,16 +57,17 @@ export const Input = ({
                 />
             </div>
 
-            {errors && errors[name] && (
-                <p className="mt-2 text-red-600 font-semibold text-sm">
-                    <i className="fa-light fa-triangle-exclamation" />
+            <ErrorMessage
+                errors={errors}
+                name={name}
+                render={({ message }) => (
+                    <p className="mt-2 text-red-600 font-semibold text-sm">
+                        <i className="fa-light fa-triangle-exclamation" />
 
-                    {
-                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                        errors[name]?.message as any
-                    }
-                </p>
-            )}
+                        {message}
+                    </p>
+                )}
+            />
         </div>
     );
 };
