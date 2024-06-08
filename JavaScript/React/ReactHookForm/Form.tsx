@@ -14,7 +14,11 @@ export const Form = ({
     defaultValues,
     onSubmit
 }: Properties) => {
-    const { handleSubmit, register } = useForm({ defaultValues });
+    const {
+        formState: { errors },
+        handleSubmit,
+        register
+    } = useForm({ defaultValues });
 
     const css = joinCss('space-y-6', className);
 
@@ -29,7 +33,8 @@ export const Form = ({
                         ...{
                             ...element.props,
                             register,
-                            key: element.props.name
+                            key: element.props.name,
+                            errors
                         }
                     });
                 }
