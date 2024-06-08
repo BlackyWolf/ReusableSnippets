@@ -1,19 +1,21 @@
 import { joinCss } from '@/utilities';
-import { Children, PropsWithChildren, createElement } from 'react';
+import { Children, ReactNode, createElement } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 
-type Properties = PropsWithChildren<{
+interface Properties<TFormData extends FieldValues> {
     className?: string;
+    children?: ReactNode | undefined;
     defaultValues?: never;
-    onSubmit: SubmitHandler<FieldValues>;
-}>;
+    onSubmit: SubmitHandler<TFormData>;
+}
 
 export const Form = ({
     children,
     className,
     defaultValues,
     onSubmit
-}: Properties) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+}: Properties<any>) => {
     const {
         formState: { errors },
         handleSubmit,
